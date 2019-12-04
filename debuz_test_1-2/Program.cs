@@ -9,27 +9,37 @@ namespace debuz_test_1_2
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Please enter a number between 0-16 to display the digit at that position");
+            Console.WriteLine("Please enter a number between 0-15 to display the digit at that position");
             LocateDigitAtIndex();
 
         }
 
         private static void LocateDigitAtIndex()
         {
-            index = Int32.Parse(Console.ReadLine());
-            if (index == 0)
+            
+
+            bool success = Int32.TryParse(Console.ReadLine(), out index);
+            if (success)
             {
-                Console.WriteLine(pi.ToString().ToCharArray().GetValue(index));
-            }
-            if (index < 17)
+                if (index == 0)
+                {
+                    Console.WriteLine("The digit at index [" + index + "] is " + pi.ToString().ToCharArray().GetValue(index));
+                    return;
+                }
+                if (index < 16)
+                {
+                    Console.WriteLine("The digit at index [" + index + "] is " + pi.ToString().ToCharArray().GetValue(index+1));
+                }
+                if (index >= 16)
+                {
+                    Console.WriteLine("Please enter a index between 0-15");
+                    LocateDigitAtIndex();
+
+                }
+            } else
             {
-                Console.WriteLine(pi.ToString().ToCharArray().GetValue(index + 1));
-            }
-            if (index >= 17)
-            {
-                Console.WriteLine("Please enter a index between 0-16");
+                Console.WriteLine("Please just numericals between 0-15");
                 LocateDigitAtIndex();
-                
             }
         }
     }
